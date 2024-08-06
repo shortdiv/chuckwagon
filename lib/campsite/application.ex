@@ -16,8 +16,8 @@ defmodule Campsite.Application do
   end
 
   def start_cowboy do
-    route1 = {"/", Campsite.Web.PageHandler, []}
-    route2 = {"/2", Campsite.Web.PageHandler, []}
+    route1 = {"/", Campsite.Web.PageHandler, :base}
+    route2 = {"/2", Campsite.Web.PageHandler, :base2}
 
     dispatch = :cowboy_router.compile([
       {:_, [
