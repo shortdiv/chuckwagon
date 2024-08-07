@@ -16,13 +16,11 @@ defmodule Campsite.Application do
   end
 
   def start_cowboy do
-    route1 = {"/", Campsite.Web.PageHandler, :base}
-    route2 = {"/2", Campsite.Web.PageHandler, :base2}
+    route1 = {:_, Campsite.Web.PageHandler, []}
 
     dispatch = :cowboy_router.compile([
       {:_, [
-        route1,
-        route2
+        route1
       ]}
     ])
 
