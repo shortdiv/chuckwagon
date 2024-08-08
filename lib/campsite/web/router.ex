@@ -15,6 +15,12 @@ defmodule Campsite.Web.Router do
     put_resp_body(conn, "<h1>This is the second base</h1>")
   end
 
+  defp content_for("/another", conn) do
+    conn
+    |> assign(:adj, "mystery")
+    |> render("another")
+  end
+
   defp content_for(not_matched, conn) do
     name = Path.basename(not_matched)
     if Enum.member?(get_templates(), name) do
@@ -31,7 +37,6 @@ defmodule Campsite.Web.Router do
   end
 
   def render(conn, name) do
-    conn = assign(conn, :adj, "great!")
     assigns = Enum.to_list(conn.assigns)
     body = EEx.eval_file("#{@template_path}/#{name}.eex", assigns)
     put_resp_body(conn, body)
