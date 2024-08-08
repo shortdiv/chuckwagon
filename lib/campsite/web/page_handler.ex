@@ -1,21 +1,17 @@
 defmodule Campsite.Web.PageHandler do
-  def init(req, _state) do
+  def init(req, router) do
+    IO.puts("here")
     path = :cowboy_req.path(req)
-    resp =
-      :cowboy_req.reply(200, %{"content-type" => "text/html"}, content_for(path), req)
+    conn = %Plugs.Conn{req_path: path}
+    conn = router.call(conn)
 
-    {:ok, resp, []}
+    resp =
+      :cowboy_req.reply(conn.status, conn.resp_header, conn.resp_body, req)
+
+    {:ok, resp, router}
   end
 
   def terminate(_reason, _req, _state) do
     :ok
-  end
-
-  def content_for("/") do
-    "<h1>This is the base content</h1>"
-  end
-
-  def content_for("/2") do
-    "<h1>This is the second base</h1>"
   end
 end
