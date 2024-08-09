@@ -5,11 +5,6 @@ defmodule Campsite.Web.PageController do
 
   def call(conn, action) do
     apply(__MODULE__, action, [conn, "controller here"])
-    content_for(conn.req_path, conn)
-  end
-
-  defp content_for("/", conn) do
-    put_resp_body(conn, "<h1>This is a thing</h1>")
   end
 
   def home(conn, msg) do
