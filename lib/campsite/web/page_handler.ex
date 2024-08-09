@@ -1,17 +1,16 @@
 defmodule Campsite.Web.PageHandler do
-  def init(req, router) do
-    IO.puts("here")
-    path = :cowboy_req.path(req)
-    conn = %Plugs.Conn{req_path: path}
-    conn = router.call(conn)
+  # def init(req, router) do
+  #   path = :cowboy_req.path(req)
+  #   conn = %Plugs.Conn{req_path: path}
+  #   conn = router.call(conn)
 
-    resp =
-      :cowboy_req.reply(conn.status, conn.resp_header, conn.resp_body, req)
+  #   resp =
+  #     :cowboy_req.reply(conn.status, conn.resp_header, conn.resp_body, req)
 
-    {:ok, resp, router}
-  end
+  #   {:ok, resp, router}
+  # end
 
-  def terminate(_reason, _req, _state) do
-    :ok
-  end
+  # def terminate(_reason, _req, _state) do
+  #   :ok
+  # end
 end

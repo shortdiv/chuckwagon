@@ -8,7 +8,7 @@ defmodule Campsite.Web.Router do
   end
 
   defp content_for("/", conn) do
-    put_resp_body(conn, "<h1>This is the base content</h1>")
+    conn |> Campsite.Web.PageController.call(:home)
   end
 
   defp content_for("/2", conn) do
