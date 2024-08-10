@@ -19,9 +19,9 @@ defmodule Sparrow.Router do
 
   defmacro get(path, controller, action, opts) do
     quote do
-      defp content_for(unquote(path), var!(conn) do
+      defp content_for(unquote(path), var!(conn)) do
         apply(unquote(controller), :call, [var!(conn), unquote(action), unquote(opts)])
-      end)
+      end
     end
   end
 end

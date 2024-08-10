@@ -1,5 +1,5 @@
 defmodule Sparrow.PageController do
-  defmacro __using__(args) do
+  defmacro __using__(_args) do
     quote do
       def call(conn, action) do
         apply(__MODULE__, action, [conn, "Controller here"])

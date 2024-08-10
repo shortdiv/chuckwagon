@@ -3,8 +3,8 @@ defmodule Campsite.Web.PageController do
 
   @template_path "lib/campsite/web/templates"
 
-  def call(conn, action) do
-    apply(__MODULE__, action, [conn, "controller here"])
+  def call(conn, action, opts \\ []) do
+    apply(__MODULE__, action, [conn, opts])
   end
 
   def home(conn, _) do
@@ -15,8 +15,8 @@ defmodule Campsite.Web.PageController do
     render(conn, "two")
   end
 
-  def not_matched(conn, _) do
-    name = Path.basename(conn.req_path)
+  def not_matched(conn, %{:path => path}) do
+    name = Path.basename(path)
     if Enum.member?(get_templates(), name) do
       render(conn, name)
     else

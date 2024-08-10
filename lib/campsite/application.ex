@@ -30,7 +30,7 @@ defmodule Campsite.Application do
       %{env: %{dispatch: dispatch}}) do
 
     {:ok, _something} ->
-      IO.puts("works")
+      IO.puts("Running cowboy on port 4000")
 
     _ ->
       IO.puts("error starting cowboy server")
