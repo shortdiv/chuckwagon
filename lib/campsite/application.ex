@@ -16,7 +16,6 @@ defmodule Campsite.Application do
   end
 
   def start_cowboy do
-    # route1 = {:_, Campsite.Web.PageHandler, Campsite.Web.Router}
     routes = [
       {:_, Sparrow.PageHandler, Campsite.Web.Router}
     ]

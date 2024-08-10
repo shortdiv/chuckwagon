@@ -7,44 +7,43 @@ defmodule Campsite.Web.PageController do
     apply(__MODULE__, action, [conn, "controller here"])
   end
 
-  def home(conn, msg) do
-    IO.inspect(conn)
-    put_resp_body(conn, "<h1>Welcome #{msg}</h1>")
+  def home(conn, _) do
+    render(conn, "home")
   end
 
-#   def contact(conn, _) do
-#     put_resp_body(conn, "This is a contact us page")
-#   end
+  def two(conn, _) do
+    render(conn, "two")
+  end
 
-#   defp other(conn, %{:path => path}) do
-#     name = Path.basename(path)
-#     if Enum.member?(get_templates(), name) do
-#       render(conn, name)
-#     else
-#       not_found(conn, name)
-#     end
-#   end
+  def not_matched(conn, _) do
+    name = Path.basename(conn.req_path)
+    if Enum.member?(get_templates(), name) do
+      render(conn, name)
+    else
+      not_found(conn, name)
+    end
+  end
 
-#   defp not_found(conn, route) do
-#     conn
-#     |> put_status(404)
-#     |> put_resp_body("<h1>oops route #{route} doesn't exist</h1>")
-#   end
+  defp not_found(conn, route) do
+    conn
+    |> put_status(404)
+    |> put_resp_body("<h1>oops route #{route} doesn't exist</h1>")
+  end
 
-#   def render(conn, name) do
-#     assigns = Enum.to_list(conn.assigns)
-#     try do
-#       body = EEx.eval_file("#{@template_path}/#{name}.eex", assigns)
-#       put_resp_body(conn, body)
-#     rescue
-#       e in CompilerError ->
-#         details = Enum.reduce(Map.from_struct(e), "", fn {k, v}, accum -> acc <> "#{k}:#{v}" end)
-#         put_resp_body(conn, "<h1>This is an error #{details}</h1>")
-#     end
-#   end
+  def render(conn, name) do
+    assigns = Enum.to_list(conn.assigns)
+    try do
+      body = EEx.eval_file("#{@template_path}/#{name}.eex", assigns)
+      put_resp_body(conn, body)
+    rescue
+      e in CompilerError ->
+        details = Enum.reduce(Map.from_struct(e), "", fn {k, v}, acc -> acc <> "#{k}:#{v}" end)
+        put_resp_body(conn, "<h1>This is an error #{details}</h1>")
+    end
+  end
 
-#   defp get_templates do
-#     for t <- Path.wildcard("#{@template_path}/*.eex"),
-#      do: Path.basename(t, ".eex")
-#   end
+  defp get_templates do
+    for t <- Path.wildcard("#{@template_path}/*.eex"),
+     do: Path.basename(t, ".eex")
+  end
 end
