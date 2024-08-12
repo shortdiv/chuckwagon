@@ -12,6 +12,8 @@ defmodule Campsite.Web.PageController do
   end
 
   def two(conn, _) do
+    conn.assigns |> Map.put("some_var", "thing")
+    conn = assign(conn, :some_var, "thing")
     render(conn, "two")
   end
 
