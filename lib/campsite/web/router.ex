@@ -1,10 +1,9 @@
 defmodule Campsite.Web.Router do
   use Sparrow.Router
+  import Sparrow.PageController
 
-  alias Campsite.Web.PageController
-
-  get "/", PageController, :home
-  get "/two", PageController, :two
+  get "/", Campsite.Web.HomeController, :index
+  get "/two", Campsite.Web.PageController, :two
   # get "/hello", HelloController, :index
 
   get not_matched, PageController, :not_matched, %{path: not_matched}
