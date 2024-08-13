@@ -4,7 +4,6 @@ defmodule Campsite.Web.Router do
 
   get "/", Campsite.Web.HomeController, :index
   get "/two", Campsite.Web.PageController, :two
-  # get "/hello", HelloController, :index
 
-  get not_matched, PageController, :not_matched, %{path: not_matched}
+  get not_matched, Campsite.Web.PageController, :not_matched, %{path: not_matched}
 end

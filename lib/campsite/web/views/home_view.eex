@@ -1,0 +1,7 @@
+<h1>Hello there here are you counselors</h1>
+
+<ul>
+  <%= for %{name: name} = counselor <- counselors do %>
+    <li><%= name %></li>
+  <% end %>
+</ul>

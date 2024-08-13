@@ -9,18 +9,19 @@ defmodule Sparrow.PageController do
         apply(__MODULE__, action, [conn, params])
       end
 
-      def render(conn, template, assigns) do
-        view_name = __MODULE__ |> Atom.to_string |> String.replace(~r/Controller$/, "View")
-        view_module = Module.concat(Elixir, view_name)
-        IO.inspect(view_name)
-        IO.inspect(view_module)
+      def render(conn, name, assigns) do
+        inner_content = EEx.eval_file("lib/campsite/web/views/#{name}_view.eex", assigns)
+        assigns = assigns ++ [{:inner_content, inner_content}]
 
-        body = view_module.render(template, assigns)
+        body = try do
+          EEx.eval_file("lib/campsite/web/templates/layouts/root.eex", assigns)
+        rescue
+          e in CompileError -> IO.inspect(e)
+        end
         Plugs.Conn.put_resp_body(conn, body)
       end
 
       def render(conn, template) do
-        IO.puts("is this called?")
         render(conn, template, Enum.to_list(conn.assigns))
       end
       @overridable [call: 2, call: 3, render: 2, render: 3]
