@@ -3,6 +3,8 @@ defmodule Sparrow.Router do
     quote do
       import Sparrow.Router
 
+      def init(opts), do: opts
+
       def call(conn) do
         content_for(conn.req_path, conn)
       end
