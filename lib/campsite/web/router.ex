@@ -1,6 +1,7 @@
 defmodule Campsite.Web.Router do
   use Plug.Router
 
+  plug Plugs.Logger, log: :info
   plug :match
   plug :dispatch
 
