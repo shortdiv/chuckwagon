@@ -1,9 +1,14 @@
 defmodule Campsite.Web.Router do
-  use Sparrow.Router
-  import Sparrow.PageController
+  use Plug.Router
 
-  get "/", Campsite.Web.HomeController, :index
-  get "/two", Campsite.Web.PageController, :two
+  plug :match
+  plug :dispatch
 
-  get not_matched, Campsite.Web.PageController, :not_matched, %{path: not_matched}
+  get "/hello" do
+    send_resp(conn, 200, "world")
+  end
+
+  match _ do
+    send_resp(conn, 404, "oops")
+  end
 end

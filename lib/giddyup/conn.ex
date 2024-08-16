@@ -89,6 +89,7 @@ defmodule Giddyup.Conn do
 
   @impl true
   def send_resp(req, status, _headers, body) do
+    IO.puts("sented???")
     req = :cowboy_req.reply(status, %{}, body, req)
     {:ok, nil, req}
   end
