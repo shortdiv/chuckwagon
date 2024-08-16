@@ -31,12 +31,9 @@ defmodule Giddyup.Handler do
   end
 
   defp send_connection(%Plug.Conn{state: :set} = conn, _plug) do
-    IO.puts("this is a resp")
     Plug.Conn.send_resp(conn)
   end
   defp send_connection(%Plug.Conn{} = conn, _plug) do
-    IO.inspect(conn.resp_body, label: "Response Body")
-    IO.inspect(conn.status, label: "Response Status")
     conn
   end
 
