@@ -22,6 +22,7 @@ defmodule Campsite.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:plug, "~> 1.14"},
       {:cowboy, "~> 2.12"}
       # {:dep_from_hexpm, "~> 0.3.0"},
