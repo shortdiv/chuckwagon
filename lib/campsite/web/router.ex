@@ -4,5 +4,8 @@ defmodule Campsite.Web.Router do
 
   plug Plugs.Logger, log: :info
 
-  get "/hello", Campsite.Web.HelloController, :index
+  scope "/dev" do
+    get "/hello", Campsite.Web.HelloController, :index
+    get "/boop", Campsite.Web.BoopController, :index
+  end
 end
