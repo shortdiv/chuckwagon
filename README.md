@@ -1,4 +1,4 @@
-# Campsite
+# Chuckwagon
 
 **TODO: Add description**
 
@@ -10,7 +10,7 @@ by adding `campsite` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:campsite, "~> 0.1.0"}
+    {:chuckwagon, "~> 0.1.0"}
   ]
 end
 ```
