@@ -41,6 +41,10 @@ defmodule Spaghetti.Router do
 
   defmacro __before_compile__(_env) do
     quote do
+      Spaghetti.Router.match do
+        Plug.Conn.resp(var!(conn), 404, "oops")
+      end
+
       defp apply_plugs(conn) do
         Enum.reduce(@plugs, conn, fn {plug, opts}, acc ->
           apply(plug, :call, [acc, opts])
