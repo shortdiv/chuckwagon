@@ -17,10 +17,11 @@ defmodule Spaghetti.Router do
     end
   end
 
-  defmacro get(path, do: block) do
+  defmacro get(path, controller, action) do
     quote do
       defp content_for(unquote(path), var!(conn)) do
-        unquote(block)
+        # controller here should be calling page controller not hellocontroller
+        apply(unquote(controller), :call, [var!(conn), unquote(action)])
       end
     end
   end

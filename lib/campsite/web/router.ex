@@ -1,9 +1,8 @@
 defmodule Campsite.Web.Router do
   use Spaghetti.Router
+  use Spaghetti.PageController
 
   plug Plugs.Logger, log: :info
 
-  get "/hello" do
-    send_resp(conn, 200, "world")
-  end
+  get "/hello", Campsite.Web.HelloController, :index
 end
