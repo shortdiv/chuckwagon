@@ -1,8 +1,8 @@
 defmodule Campsite.Web.HelloController do
   use Spaghetti.PageController
 
-  @message "hello"
+  @person "stranger"
   def index(conn, _params) do
-    render(conn, "hello", message: @message)
+    render(conn, "hello", person: @person)
   end
 end
