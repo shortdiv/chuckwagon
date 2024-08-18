@@ -8,56 +8,55 @@ defmodule Spaghetti.Router do
       import Plug
 
       @before_compile Spaghetti.Router
+
+      @prefix ""
       @plugs []
+      @scope_path []
       @routes []
       Module.register_attribute(__MODULE__, :routes, accumulate: true)
+
+      import unquote(__MODULE__)
+      @before_compile unquote(__MODULE__)
 
       def init(opts), do: opts
 
       def call(conn, _opts) do
-        IO.puts("calliung")
         conn = apply_plugs(conn)
 
-        # content_for(conn.request_path, conn)
         dispatch(conn.method, conn.request_path, conn)
       end
 
       defp dispatch(method, path, conn) do
-        routes = @routes
-        IO.puts("routing things I think?")
-        case Enum.find(@routes, fn {m, p, _, _} -> m == String.downcase(method) and p == path end) do
-          {_,_, handler} ->
-            IO.inspect(handler)
-            IO.puts("what is this")
-            handler.(conn)
+        # sneaky way to get routes at runtime, for some reason @routes is empty on runtime
+        routes = __routes__()
+
+        method = String.downcase(method) |> String.to_existing_atom()
+        case Enum.find(routes, fn {m, p, _, _, _} -> m == method and p == path end) do
+          {_method, _path, controller, action, opts} ->
+            apply(controller, action, [conn, opts])
           nil -> conn |> send_resp(404, "Not found")
         end
       end
     end
   end
 
-  # block is like this before the quote and then it borks
   # {:__block__, [], [{:get, [line: 9, column: 5], ["/hello", {:__aliases__, [line: 9, column: 19], [:Campsite, :Web, :HelloController]}, :index]}, {:get, [line: 10, column: 5], ["/boop", {:__aliases__, [line: 10, column: 18], [:Campsite, :Web, :BoopController]}, :index]}]}
   defmacro scope(prefix, do: block) do
-    IO.inspect(block)
     quote do
-      IO.puts("wjhfiwegyforw")
+      previous_scope = @scope_path
+      @scope_path [@scope_path, unquote(prefix)] |> List.flatten |> Enum.join("/") |> String.replace("//", "/")
       @prefix unquote(prefix)
-      IO.inspect(unquote(block))
-      IO.puts("hey")
       unquote(block)
+      @scope_path previous_scope
     end
   end
 
-  defmacro get(path, controller, action) do
+  defmacro get(path, controller, action, opts \\ []) do
     quote do
       path_with_prefix = Path.join(@prefix || "", unquote(path))
 
-      handler = fn conn ->
-        apply(unquote(controller), unquote(action), [conn])
-      end
-
-      @routes [{:get, path_with_prefix, handler} | @routes]
+      @routes {:get, path_with_prefix, unquote(controller), unquote(action), unquote(opts)}
+      @routes
     end
   end
 
@@ -78,6 +77,11 @@ defmodule Spaghetti.Router do
       # Spaghetti.Router.match do
       #   Plug.Conn.resp(conn, 404, "oops")
       # end
+
+      # Sneaky way to get runtime access to routes since Module.get_attribute(__MODULE__, :routes) is only accessible at compile time
+      def __routes__ do
+        @routes
+      end
 
       defp apply_plugs(conn) do
         Enum.reduce(@plugs, conn, fn {plug, opts}, acc ->
