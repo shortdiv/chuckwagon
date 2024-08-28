@@ -1,7 +1,7 @@
-defmodule Campsite.Web.PageController do
+defmodule HowdyElixirConf.Web.PageController do
   import Plugs.Conn
 
-  @template_path "lib/campsite/web/templates"
+  @template_path "lib/howdy_elixir_conf/web/templates"
 
   def call(conn, action, opts \\ []) do
     apply(__MODULE__, action, [conn, opts])

@@ -1,6 +1,6 @@
-defmodule Campsite do
+defmodule HowdyElixirConf do
   @moduledoc """
-  Documentation for `Campsite`.
+  Documentation for `HowdyElixirConf`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Campsite do
 
   ## Examples
 
-      iex> Campsite.hello()
+      iex> HowdyElixirConf.hello()
       :world
 
   """

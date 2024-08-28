@@ -1,8 +1,8 @@
-defmodule Campsite.Web.Router do
+defmodule HowdyElixirConf.Web.Router do
   use Spaghetti.Router
   # import Plugs.Conn
 
-  alias Campsite.Web.PageController
+  alias HowdyElixirConf.Web.PageController
 
   get "/", PageController, :home
   get "/2", PageController, :two

@@ -1,4 +1,4 @@
-defmodule Campsite.Application do
+defmodule HowdyElixirConf.Application do
   @moduledoc false
 
   use Application
@@ -7,17 +7,17 @@ defmodule Campsite.Application do
   def start(_type, _args) do
     start_cowboy()
     children = [
-      # Starts a worker by calling: Campsite.Worker.start_link(arg)
-      # {Campsite.Worker, arg}
+      # Starts a worker by calling: HowdyElixirConf.Worker.start_link(arg)
+      # {HowdyElixirConf.Worker, arg}
     ]
 
-    opts = [strategy: :one_for_one, name: Campsite.Supervisor]
+    opts = [strategy: :one_for_one, name: HowdyElixirConf.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
   def start_cowboy do
     routes = [
-      {:_, Spaghetti.PageHandler, Campsite.Web.Router}
+      {:_, Spaghetti.PageHandler, HowdyElixirConf.Web.Router}
     ]
 
     dispatch = :cowboy_router.compile([
