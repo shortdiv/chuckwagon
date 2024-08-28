@@ -1,4 +1,4 @@
-defmodule Campsite.Web.PageHandler do
+defmodule HowdyElixirConf.Web.PageHandler do
   # def init(req, router) do
   #   path = :cowboy_req.path(req)
   #   conn = %Plugs.Conn{req_path: path}

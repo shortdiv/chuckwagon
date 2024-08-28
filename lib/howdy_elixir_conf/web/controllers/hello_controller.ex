@@ -1,4 +1,4 @@
-defmodule Campsite.Web.HelloController do
+defmodule HowdyElixirConf.Web.HelloController do
   use Spaghetti.PageController
 
   @person "stranger"

@@ -1,4 +1,4 @@
-defmodule Campsite.Web.HomeController do
+defmodule HowdyElixirConf.Web.HomeController do
   use Sparrow.PageController
 
   # any and all assigns happen here!

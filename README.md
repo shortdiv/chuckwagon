@@ -1,4 +1,4 @@
-# Campsite
+# HowdyElixirConf
 
 **TODO: Add description**
 

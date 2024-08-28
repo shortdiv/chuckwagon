@@ -1,4 +1,4 @@
-defmodule Campsite.Web.PageController do
+defmodule HowdyElixirConf.Web.PageController do
   import Plugs.Conn
 
   @template_path "lib/campsite/web/templates"

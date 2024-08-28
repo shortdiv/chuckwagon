@@ -1,5 +1,5 @@
-defmodule Campsite.Web.HelloView do
-  @template_path "lib/campsite/web/templates"
+defmodule HowdyElixirConf.Web.HelloView do
+  @template_path "lib/howdy_elixir_conf/web/templates"
 
   def render(conn, name, assigns) do
     try do

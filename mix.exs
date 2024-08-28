@@ -1,4 +1,4 @@
-defmodule Campsite.MixProject do
+defmodule HowdyElixirConf.MixProject do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule Campsite.MixProject do
   def application do
     [
       extra_applications: [:logger, :inets],
-      mod: {Campsite.Application, []}
+      mod: {HowdyElixirConf.Application, []}
     ]
   end
 

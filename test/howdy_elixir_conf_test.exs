@@ -1,6 +1,6 @@
-defmodule CampsiteTest do
+defmodule HowdyElixirConfTest do
   use ExUnit.Case
-  doctest Campsite
+  doctest HowdyElixirConf
 
   test "returns hello world" do
     assert {:ok, {{'HTTP/1.1', 200, 'OK'}, _headers, '<!doctype html><h1>Hello World!</h1>'}} =

@@ -40,7 +40,7 @@ defmodule Spaghetti.Router do
     end
   end
 
-  # {:__block__, [], [{:get, [line: 9, column: 5], ["/hello", {:__aliases__, [line: 9, column: 19], [:Campsite, :Web, :HelloController]}, :index]}, {:get, [line: 10, column: 5], ["/boop", {:__aliases__, [line: 10, column: 18], [:Campsite, :Web, :BoopController]}, :index]}]}
+  # {:__block__, [], [{:get, [line: 9, column: 5], ["/hello", {:__aliases__, [line: 9, column: 19], [:HowdyElixirConf, :Web, :HelloController]}, :index]}, {:get, [line: 10, column: 5], ["/boop", {:__aliases__, [line: 10, column: 18], [:HowdyElixirConf, :Web, :BoopController]}, :index]}]}
   defmacro scope(prefix, do: block) do
     quote do
       previous_scope = @scope_path
