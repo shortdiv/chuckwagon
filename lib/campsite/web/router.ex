@@ -1,5 +1,5 @@
 defmodule Campsite.Web.Router do
-  use Sparrow.Router
+  use Spaghetti.Router
   # import Plugs.Conn
 
   alias Campsite.Web.PageController

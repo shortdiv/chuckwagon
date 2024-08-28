@@ -17,7 +17,7 @@ defmodule Campsite.Application do
 
   def start_cowboy do
     routes = [
-      {:_, Sparrow.PageHandler, Campsite.Web.Router}
+      {:_, Spaghetti.PageHandler, Campsite.Web.Router}
     ]
 
     dispatch = :cowboy_router.compile([

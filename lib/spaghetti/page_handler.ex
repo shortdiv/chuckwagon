@@ -1,4 +1,4 @@
-defmodule Sparrow.PageHandler do
+defmodule Spaghetti.PageHandler do
   def init(req, router) do
     path = :cowboy_req.path(req)
     conn = %Plugs.Conn{req_path: path}

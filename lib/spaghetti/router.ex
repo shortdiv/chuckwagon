@@ -1,7 +1,7 @@
-defmodule Sparrow.Router do
+defmodule Spaghetti.Router do
   defmacro __using__(_opts) do
     quote do
-      import Sparrow.Router
+      import Spaghetti.Router
 
       def call(conn) do
         content_for(conn.req_path, conn)

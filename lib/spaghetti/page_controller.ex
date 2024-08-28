@@ -1,4 +1,4 @@
-defmodule Sparrow.PageController do
+defmodule Spaghetti.PageController do
   defmacro __using__(_args) do
     quote do
       def call(conn, action) do
